@@ -31,9 +31,11 @@
   product.make25Discount();
   console.log(product.price);
 
-  function ProductES6() {
-    this.price = 100;
-    this.make25Discount = function() {
+  class ProductES6 {
+    constructor() {
+      this.price = 100;
+    }
+    make25Discount() {
       this.price *= 0.75;
     }
   }

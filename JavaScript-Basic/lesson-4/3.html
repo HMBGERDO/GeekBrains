@@ -31,6 +31,26 @@
 <script>
   "use strict";
 
+  function showError() {
+    console.log("Что-то пошло не так");
+  }
+
+  function getDigitsOfNumber(number) {
+    if (number < 0 || number > 999 || !(number % 1 == 0)) {
+      showError();
+      return {};
+    }
+    const object = {}
+    object.units = number % 10;
+    object.dosens = (number - object.units) / 10 % 10;
+    object.hundreds = (number - object.dosens * 10 - object.units) / 100;
+    return object;
+  }
+
+  getDigitsOfNumber(-5);
+  getDigitsOfNumber(1001);
+  getDigitsOfNumber(100.4);
+  getDigitsOfNumber(123);
   // Здесь пишем решение, данный комментарий необходимо стереть.
 </script>
 </body>

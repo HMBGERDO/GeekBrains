@@ -53,20 +53,71 @@
   function PostES5(author="Author", text="Empty") {
     this.author = author;
     this.text = text;
-    this.updateTime = "someTime";
+    this.updateTime = new Date();
   }
   PostES5.prototype.update = function(text) {
-    this.updateTime = "someUpdateTime";
+    this.updateTime = new Date();
     this.text = text;
   }
-  PostES5.prototype.print = function(text) {
+  PostES5.prototype.print = function() {
     return (`[${this.updateTime}] ${this.author}: ${this.text}`)
   }
   let testPost = new PostES5("Johnny", "Hello, World!");
   console.log(testPost.print());
   testPost.update("What a cool day!");
   console.log(testPost.print());
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+
+  function AttachedPostES5(author="Author", text="Empty", highlighted=false) {
+    PostES5.call(this, author, text);
+    this.highlighted = highlighted;
+  }
+  AttachedPostES5.prototype = Object.create(PostES5.prototype);
+  AttachedPostES5.prototype.constructor = AttachedPostES5;
+  AttachedPostES5.prototype.makeHighlighted = function() {
+    this.highlighted = true;
+  }
+  testPost = new AttachedPostES5("Johnny", "Hello, World!");
+  console.log(testPost.print());
+  testPost.makeHighlighted();
+  testPost.update("What a cool day!");
+  console.log(testPost.print());
+  
+  
+  class PostES6 {
+    constructor(author="Author", text="Empty") {
+      this.author = author;
+      this.text = text;
+      this.updateTime = new Date();
+    }
+    update(text) {
+      this.updateTime = new Date();
+      this.text = text;
+    }
+    print() {
+      return (`[${this.updateTime}] ${this.author}: ${this.text}`)
+    }
+  }
+
+  testPost = new PostES6("Johnny", "Hello, World!");
+  console.log(testPost.print());
+  testPost.update("What a cool day!");
+  console.log(testPost.print());
+
+  class AttachedPostES6 extends PostES6 {
+    constructor(author="Author", text="Empty", highlighted=false) {
+      super(author, text);
+      this.highlighted = highlighted;
+    }
+    makeHighlighted() {
+      this.highlighted = true;
+    }
+  }
+
+  testPost = new AttachedPostES6("Johnny", "Hello, World!");
+  console.log(testPost.print());
+  testPost.makeHighlighted();
+  testPost.update("What a cool day!");
+  console.log(testPost.print());
 </script>
 </body>
 </html>
