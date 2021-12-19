@@ -48,8 +48,8 @@ const updateCartCount = function() {
             let total = document.createElement("div");
             name.innerText = productList[i][0];
             amount.innerText = cart[i];
-            price.innerText = productList[i][1].toFixed(2) + "$";
-            total.innerText = (cart[i] * productList[i][1]).toFixed(2) + "$";
+            price.innerText = "$" + productList[i][1].toFixed(2);
+            total.innerText = "$" + (cart[i] * productList[i][1]).toFixed(2);
             childEl.appendChild(name);
             childEl.appendChild(amount);
             childEl.appendChild(price);
@@ -59,7 +59,7 @@ const updateCartCount = function() {
             totalPrice += cart[i] * productList[i][1];
         };
     }
-    cartTotalEl.innerText = totalPrice.toFixed(2) + "$";
+    cartTotalEl.innerText = "$" + totalPrice.toFixed(2);
 };
 
 
